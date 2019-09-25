@@ -20,14 +20,21 @@ import (
 	"knative.dev/pkg/apis"
 )
 
+const (
+	// KnativeServingConditionReady is set when the KnativeServing's latest
+	// underlying revision has reported readiness.
+	KnativeServingConditionReady = apis.ConditionReady
+)
+
 var conditions = apis.NewLivingConditionSet(
+	KnativeServingConditionReady,
 	DeploymentsAvailable,
 	InstallSucceeded,
 )
 
 // GroupVersionKind returns SchemeGroupVersion of a KnativeServing
 func (ks *KnativeServing) GroupVersionKind() schema.GroupVersionKind {
-	return SchemeGroupVersion.WithKind("KnativeServing")
+	return SchemeGroupVersion.WithKind(Kind)
 }
 
 // GetConditions implements apis.ConditionsAccessor
