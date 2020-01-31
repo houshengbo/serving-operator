@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: iks-knative-ingress
+  namespace: istio-system
+  annotations:
+    ingress.bluemix.net/upstream-fail-timeout: "serviceName=knative-ingressgateway fail-timeout=30"
+    ingress.bluemix.net/upstream-max-fails: "serviceName=knative-ingressgateway max-fails=0"
+    ingress.bluemix.net/client-max-body-size: "size=200m"
+spec:
+  rules:
+    - host: "*.vincent-development-5290c8c8e5797924dc1ad5d1b85b37c0-0000.us-east.containers.appdomain.cloud"
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: istio-ingressgateway
+              servicePort: 80

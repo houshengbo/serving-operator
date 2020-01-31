@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-domain
+  namespace: knative-serving
+  labels:
+    serving.knative.dev/release: devel
+data:
+  vincent-development-5290c8c8e5797924dc1ad5d1b85b37c0-0000.us-east.containers.appdomain.cloud: ""
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-network
+  namespace: knative-serving
+  labels:
+    serving.knative.dev/release: devel
+data:
+  istio.sidecar.includeOutboundIPRanges: "172.30.0.0/16,172.20.0.0/16,10.10.10.0/24"
+  #domainTemplate: "{{=<% %>=}}{{.Name}}-{{.Namespace}}.{{.Domain}}"
